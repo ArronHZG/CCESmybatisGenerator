@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bupt.core.supplier.mapper.TBusinessSupplierAuditMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bupt.core.supplier.model.TBusinessSupplierAudit" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+        <result column="init_time" property="initTime" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="audit_user" property="auditUser" jdbcType="INTEGER" />
+        <result column="audit_start_time" property="auditStartTime" jdbcType="VARCHAR" />
+        <result column="audit_end_time" property="auditEndTime" jdbcType="VARCHAR" />
+        <result column="credit_score" property="creditScore" jdbcType="INTEGER" />
+        <result column="audit_result" property="auditResult" jdbcType="VARCHAR" />
+        <result column="audit_url" property="auditUrl" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, supplier_id, init_time, type, audit_user, audit_start_time, audit_end_time, credit_score, 
+        audit_result, audit_url
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bupt.core.supplier.model.TBusinessSupplierAuditExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_business_supplier_audit
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_business_supplier_audit
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_business_supplier_audit
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bupt.core.supplier.model.TBusinessSupplierAuditExample" >
+        delete from t_business_supplier_audit
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bupt.core.supplier.model.TBusinessSupplierAudit" >
+        insert into t_business_supplier_audit (id, supplier_id, init_time, 
+            type, audit_user, audit_start_time, 
+            audit_end_time, credit_score, audit_result, 
+            audit_url)
+        values (#{id,jdbcType=INTEGER}, #{supplierId,jdbcType=INTEGER}, #{initTime,jdbcType=VARCHAR}, 
+            #{type,jdbcType=VARCHAR}, #{auditUser,jdbcType=INTEGER}, #{auditStartTime,jdbcType=VARCHAR}, 
+            #{auditEndTime,jdbcType=VARCHAR}, #{creditScore,jdbcType=INTEGER}, #{auditResult,jdbcType=VARCHAR}, 
+            #{auditUrl,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bupt.core.supplier.model.TBusinessSupplierAudit" >
+        insert into t_business_supplier_audit
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="supplierId != null" >
+                supplier_id,
+            </if>
+            <if test="initTime != null" >
+                init_time,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="auditUser != null" >
+                audit_user,
+            </if>
+            <if test="auditStartTime != null" >
+                audit_start_time,
+            </if>
+            <if test="auditEndTime != null" >
+                audit_end_time,
+            </if>
+            <if test="creditScore != null" >
+                credit_score,
+            </if>
+            <if test="auditResult != null" >
+                audit_result,
+            </if>
+            <if test="auditUrl != null" >
+                audit_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="supplierId != null" >
+                #{supplierId,jdbcType=INTEGER},
+            </if>
+            <if test="initTime != null" >
+                #{initTime,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUser != null" >
+                #{auditUser,jdbcType=INTEGER},
+            </if>
+            <if test="auditStartTime != null" >
+                #{auditStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="auditEndTime != null" >
+                #{auditEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="creditScore != null" >
+                #{creditScore,jdbcType=INTEGER},
+            </if>
+            <if test="auditResult != null" >
+                #{auditResult,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUrl != null" >
+                #{auditUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bupt.core.supplier.model.TBusinessSupplierAuditExample" resultType="java.lang.Integer" >
+        select count(*) from t_business_supplier_audit
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_business_supplier_audit
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.supplierId != null" >
+                supplier_id = #{record.supplierId,jdbcType=INTEGER},
+            </if>
+            <if test="record.initTime != null" >
+                init_time = #{record.initTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null" >
+                type = #{record.type,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditUser != null" >
+                audit_user = #{record.auditUser,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditStartTime != null" >
+                audit_start_time = #{record.auditStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditEndTime != null" >
+                audit_end_time = #{record.auditEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creditScore != null" >
+                credit_score = #{record.creditScore,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditResult != null" >
+                audit_result = #{record.auditResult,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditUrl != null" >
+                audit_url = #{record.auditUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_business_supplier_audit
+        set id = #{record.id,jdbcType=INTEGER},
+            supplier_id = #{record.supplierId,jdbcType=INTEGER},
+            init_time = #{record.initTime,jdbcType=VARCHAR},
+            type = #{record.type,jdbcType=VARCHAR},
+            audit_user = #{record.auditUser,jdbcType=INTEGER},
+            audit_start_time = #{record.auditStartTime,jdbcType=VARCHAR},
+            audit_end_time = #{record.auditEndTime,jdbcType=VARCHAR},
+            credit_score = #{record.creditScore,jdbcType=INTEGER},
+            audit_result = #{record.auditResult,jdbcType=VARCHAR},
+            audit_url = #{record.auditUrl,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.core.supplier.model.TBusinessSupplierAudit" >
+        update t_business_supplier_audit
+        <set >
+            <if test="supplierId != null" >
+                supplier_id = #{supplierId,jdbcType=INTEGER},
+            </if>
+            <if test="initTime != null" >
+                init_time = #{initTime,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUser != null" >
+                audit_user = #{auditUser,jdbcType=INTEGER},
+            </if>
+            <if test="auditStartTime != null" >
+                audit_start_time = #{auditStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="auditEndTime != null" >
+                audit_end_time = #{auditEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="creditScore != null" >
+                credit_score = #{creditScore,jdbcType=INTEGER},
+            </if>
+            <if test="auditResult != null" >
+                audit_result = #{auditResult,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUrl != null" >
+                audit_url = #{auditUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bupt.core.supplier.model.TBusinessSupplierAudit" >
+        update t_business_supplier_audit
+        set supplier_id = #{supplierId,jdbcType=INTEGER},
+            init_time = #{initTime,jdbcType=VARCHAR},
+            type = #{type,jdbcType=VARCHAR},
+            audit_user = #{auditUser,jdbcType=INTEGER},
+            audit_start_time = #{auditStartTime,jdbcType=VARCHAR},
+            audit_end_time = #{auditEndTime,jdbcType=VARCHAR},
+            credit_score = #{creditScore,jdbcType=INTEGER},
+            audit_result = #{auditResult,jdbcType=VARCHAR},
+            audit_url = #{auditUrl,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

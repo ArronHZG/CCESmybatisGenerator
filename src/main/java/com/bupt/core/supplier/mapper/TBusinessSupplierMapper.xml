@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bupt.core.supplier.mapper.TBusinessSupplierMapper" >
+
+    <resultMap id="BaseResultMap" type="com.bupt.core.supplier.model.TBusinessSupplier" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="abbr" property="abbr" jdbcType="VARCHAR" />
+        <result column="en_name" property="enName" jdbcType="VARCHAR" />
+        <result column="contact_person" property="contactPerson" jdbcType="VARCHAR" />
+        <result column="contact" property="contact" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="institutional_code" property="institutionalCode" jdbcType="VARCHAR" />
+        <result column="property" property="property" jdbcType="VARCHAR" />
+        <result column="tax_number" property="taxNumber" jdbcType="VARCHAR" />
+        <result column="register_address" property="registerAddress" jdbcType="VARCHAR" />
+        <result column="register_date" property="registerDate" jdbcType="VARCHAR" />
+        <result column="industry_id" property="industryId" jdbcType="INTEGER" />
+        <result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+        <result column="region" property="region" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="district" property="district" jdbcType="VARCHAR" />
+        <result column="asset" property="asset" jdbcType="INTEGER" />
+        <result column="mailing_address" property="mailingAddress" jdbcType="VARCHAR" />
+        <result column="business_address" property="businessAddress" jdbcType="VARCHAR" />
+        <result column="homepage" property="homepage" jdbcType="VARCHAR" />
+        <result column="business_scope" property="businessScope" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="LONGVARCHAR" />
+        <result column="payment_time" property="paymentTime" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+        <result column="audit_person" property="auditPerson" jdbcType="VARCHAR" />
+        <result column="audit_phone" property="auditPhone" jdbcType="VARCHAR" />
+        <result column="audit_email" property="auditEmail" jdbcType="VARCHAR" />
+        <result column="due_diligence_person" property="dueDiligencePerson" jdbcType="VARCHAR" />
+        <result column="due_diligence_phone" property="dueDiligencePhone" jdbcType="VARCHAR" />
+        <result column="due_diligence_email" property="dueDiligenceEmail" jdbcType="VARCHAR" />
+        <result column="due_diligence_result" property="dueDiligenceResult" jdbcType="VARCHAR" />
+        <result column="due_deligence_date" property="dueDeligenceDate" jdbcType="VARCHAR" />
+        <result column="audit_status" property="auditStatus" jdbcType="VARCHAR" />
+        <result column="audit_result" property="auditResult" jdbcType="VARCHAR" />
+        <result column="credit_score" property="creditScore" jdbcType="INTEGER" />
+        <result column="credit_rating" property="creditRating" jdbcType="VARCHAR" />
+        <result column="certificate_id" property="certificateId" jdbcType="INTEGER" />
+        <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+        <result column="supplier_files" property="supplierFiles" jdbcType="VARCHAR" />
+        <result column="reserved1" property="reserved1" jdbcType="VARCHAR" />
+        <result column="reserved2" property="reserved2" jdbcType="VARCHAR" />
+        <result column="audit_start_time" property="auditStartTime" jdbcType="VARCHAR" />
+        <result column="audit_end_time" property="auditEndTime" jdbcType="VARCHAR" />
+        <result column="payment_status" property="paymentStatus" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, name, abbr, en_name, contact_person, contact, email, institutional_code, property, 
+        tax_number, register_address, register_date, industry_id, legal_person, region, province, 
+        city, district, asset, mailing_address, business_address, homepage, business_scope, 
+        description, payment_time, create_time, audit_person, audit_phone, audit_email, due_diligence_person, 
+        due_diligence_phone, due_diligence_email, due_diligence_result, due_deligence_date, 
+        audit_status, audit_result, credit_score, credit_rating, certificate_id, update_time, 
+        supplier_files, reserved1, reserved2, audit_start_time, audit_end_time, payment_status
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bupt.core.supplier.model.TBusinessSupplierExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_business_supplier
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_business_supplier
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_business_supplier
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bupt.core.supplier.model.TBusinessSupplierExample" >
+        delete from t_business_supplier
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.bupt.core.supplier.model.TBusinessSupplier" >
+        insert into t_business_supplier (id, name, abbr, 
+            en_name, contact_person, contact, 
+            email, institutional_code, property, 
+            tax_number, register_address, register_date, 
+            industry_id, legal_person, region, 
+            province, city, district, 
+            asset, mailing_address, business_address, 
+            homepage, business_scope, description, 
+            payment_time, create_time, audit_person, 
+            audit_phone, audit_email, due_diligence_person, 
+            due_diligence_phone, due_diligence_email, 
+            due_diligence_result, due_deligence_date, 
+            audit_status, audit_result, credit_score, 
+            credit_rating, certificate_id, update_time, 
+            supplier_files, reserved1, reserved2, 
+            audit_start_time, audit_end_time, payment_status
+            )
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{abbr,jdbcType=VARCHAR}, 
+            #{enName,jdbcType=VARCHAR}, #{contactPerson,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
+            #{email,jdbcType=VARCHAR}, #{institutionalCode,jdbcType=VARCHAR}, #{property,jdbcType=VARCHAR}, 
+            #{taxNumber,jdbcType=VARCHAR}, #{registerAddress,jdbcType=VARCHAR}, #{registerDate,jdbcType=VARCHAR}, 
+            #{industryId,jdbcType=INTEGER}, #{legalPerson,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+            #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
+            #{asset,jdbcType=INTEGER}, #{mailingAddress,jdbcType=VARCHAR}, #{businessAddress,jdbcType=VARCHAR}, 
+            #{homepage,jdbcType=VARCHAR}, #{businessScope,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}, 
+            #{paymentTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{auditPerson,jdbcType=VARCHAR}, 
+            #{auditPhone,jdbcType=VARCHAR}, #{auditEmail,jdbcType=VARCHAR}, #{dueDiligencePerson,jdbcType=VARCHAR}, 
+            #{dueDiligencePhone,jdbcType=VARCHAR}, #{dueDiligenceEmail,jdbcType=VARCHAR}, 
+            #{dueDiligenceResult,jdbcType=VARCHAR}, #{dueDeligenceDate,jdbcType=VARCHAR}, 
+            #{auditStatus,jdbcType=VARCHAR}, #{auditResult,jdbcType=VARCHAR}, #{creditScore,jdbcType=INTEGER}, 
+            #{creditRating,jdbcType=VARCHAR}, #{certificateId,jdbcType=INTEGER}, #{updateTime,jdbcType=VARCHAR}, 
+            #{supplierFiles,jdbcType=VARCHAR}, #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR}, 
+            #{auditStartTime,jdbcType=VARCHAR}, #{auditEndTime,jdbcType=VARCHAR}, #{paymentStatus,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bupt.core.supplier.model.TBusinessSupplier" >
+        insert into t_business_supplier
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="abbr != null" >
+                abbr,
+            </if>
+            <if test="enName != null" >
+                en_name,
+            </if>
+            <if test="contactPerson != null" >
+                contact_person,
+            </if>
+            <if test="contact != null" >
+                contact,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="institutionalCode != null" >
+                institutional_code,
+            </if>
+            <if test="property != null" >
+                property,
+            </if>
+            <if test="taxNumber != null" >
+                tax_number,
+            </if>
+            <if test="registerAddress != null" >
+                register_address,
+            </if>
+            <if test="registerDate != null" >
+                register_date,
+            </if>
+            <if test="industryId != null" >
+                industry_id,
+            </if>
+            <if test="legalPerson != null" >
+                legal_person,
+            </if>
+            <if test="region != null" >
+                region,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="district != null" >
+                district,
+            </if>
+            <if test="asset != null" >
+                asset,
+            </if>
+            <if test="mailingAddress != null" >
+                mailing_address,
+            </if>
+            <if test="businessAddress != null" >
+                business_address,
+            </if>
+            <if test="homepage != null" >
+                homepage,
+            </if>
+            <if test="businessScope != null" >
+                business_scope,
+            </if>
+            <if test="description != null" >
+                description,
+            </if>
+            <if test="paymentTime != null" >
+                payment_time,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="auditPerson != null" >
+                audit_person,
+            </if>
+            <if test="auditPhone != null" >
+                audit_phone,
+            </if>
+            <if test="auditEmail != null" >
+                audit_email,
+            </if>
+            <if test="dueDiligencePerson != null" >
+                due_diligence_person,
+            </if>
+            <if test="dueDiligencePhone != null" >
+                due_diligence_phone,
+            </if>
+            <if test="dueDiligenceEmail != null" >
+                due_diligence_email,
+            </if>
+            <if test="dueDiligenceResult != null" >
+                due_diligence_result,
+            </if>
+            <if test="dueDeligenceDate != null" >
+                due_deligence_date,
+            </if>
+            <if test="auditStatus != null" >
+                audit_status,
+            </if>
+            <if test="auditResult != null" >
+                audit_result,
+            </if>
+            <if test="creditScore != null" >
+                credit_score,
+            </if>
+            <if test="creditRating != null" >
+                credit_rating,
+            </if>
+            <if test="certificateId != null" >
+                certificate_id,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="supplierFiles != null" >
+                supplier_files,
+            </if>
+            <if test="reserved1 != null" >
+                reserved1,
+            </if>
+            <if test="reserved2 != null" >
+                reserved2,
+            </if>
+            <if test="auditStartTime != null" >
+                audit_start_time,
+            </if>
+            <if test="auditEndTime != null" >
+                audit_end_time,
+            </if>
+            <if test="paymentStatus != null" >
+                payment_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="abbr != null" >
+                #{abbr,jdbcType=VARCHAR},
+            </if>
+            <if test="enName != null" >
+                #{enName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPerson != null" >
+                #{contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="contact != null" >
+                #{contact,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="institutionalCode != null" >
+                #{institutionalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="property != null" >
+                #{property,jdbcType=VARCHAR},
+            </if>
+            <if test="taxNumber != null" >
+                #{taxNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="registerAddress != null" >
+                #{registerAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDate != null" >
+                #{registerDate,jdbcType=VARCHAR},
+            </if>
+            <if test="industryId != null" >
+                #{industryId,jdbcType=INTEGER},
+            </if>
+            <if test="legalPerson != null" >
+                #{legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="region != null" >
+                #{region,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="asset != null" >
+                #{asset,jdbcType=INTEGER},
+            </if>
+            <if test="mailingAddress != null" >
+                #{mailingAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="businessAddress != null" >
+                #{businessAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="homepage != null" >
+                #{homepage,jdbcType=VARCHAR},
+            </if>
+            <if test="businessScope != null" >
+                #{businessScope,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="paymentTime != null" >
+                #{paymentTime,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="auditPerson != null" >
+                #{auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="auditPhone != null" >
+                #{auditPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="auditEmail != null" >
+                #{auditEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="dueDiligencePerson != null" >
+                #{dueDiligencePerson,jdbcType=VARCHAR},
+            </if>
+            <if test="dueDiligencePhone != null" >
+                #{dueDiligencePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="dueDiligenceEmail != null" >
+                #{dueDiligenceEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="dueDiligenceResult != null" >
+                #{dueDiligenceResult,jdbcType=VARCHAR},
+            </if>
+            <if test="dueDeligenceDate != null" >
+                #{dueDeligenceDate,jdbcType=VARCHAR},
+            </if>
+            <if test="auditStatus != null" >
+                #{auditStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="auditResult != null" >
+                #{auditResult,jdbcType=VARCHAR},
+            </if>
+            <if test="creditScore != null" >
+                #{creditScore,jdbcType=INTEGER},
+            </if>
+            <if test="creditRating != null" >
+                #{creditRating,jdbcType=VARCHAR},
+            </if>
+            <if test="certificateId != null" >
+                #{certificateId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierFiles != null" >
+                #{supplierFiles,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved1 != null" >
+                #{reserved1,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved2 != null" >
+                #{reserved2,jdbcType=VARCHAR},
+            </if>
+            <if test="auditStartTime != null" >
+                #{auditStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="auditEndTime != null" >
+                #{auditEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentStatus != null" >
+                #{paymentStatus,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bupt.core.supplier.model.TBusinessSupplierExample" resultType="java.lang.Integer" >
+        select count(*) from t_business_supplier
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_business_supplier
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.name != null" >
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.abbr != null" >
+                abbr = #{record.abbr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.enName != null" >
+                en_name = #{record.enName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactPerson != null" >
+                contact_person = #{record.contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contact != null" >
+                contact = #{record.contact,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null" >
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.institutionalCode != null" >
+                institutional_code = #{record.institutionalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.property != null" >
+                property = #{record.property,jdbcType=VARCHAR},
+            </if>
+            <if test="record.taxNumber != null" >
+                tax_number = #{record.taxNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.registerAddress != null" >
+                register_address = #{record.registerAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.registerDate != null" >
+                register_date = #{record.registerDate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.industryId != null" >
+                industry_id = #{record.industryId,jdbcType=INTEGER},
+            </if>
+            <if test="record.legalPerson != null" >
+                legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="record.region != null" >
+                region = #{record.region,jdbcType=VARCHAR},
+            </if>
+            <if test="record.province != null" >
+                province = #{record.province,jdbcType=VARCHAR},
+            </if>
+            <if test="record.city != null" >
+                city = #{record.city,jdbcType=VARCHAR},
+            </if>
+            <if test="record.district != null" >
+                district = #{record.district,jdbcType=VARCHAR},
+            </if>
+            <if test="record.asset != null" >
+                asset = #{record.asset,jdbcType=INTEGER},
+            </if>
+            <if test="record.mailingAddress != null" >
+                mailing_address = #{record.mailingAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.businessAddress != null" >
+                business_address = #{record.businessAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.homepage != null" >
+                homepage = #{record.homepage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.businessScope != null" >
+                business_scope = #{record.businessScope,jdbcType=VARCHAR},
+            </if>
+            <if test="record.description != null" >
+                description = #{record.description,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.paymentTime != null" >
+                payment_time = #{record.paymentTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditPerson != null" >
+                audit_person = #{record.auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditPhone != null" >
+                audit_phone = #{record.auditPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditEmail != null" >
+                audit_email = #{record.auditEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dueDiligencePerson != null" >
+                due_diligence_person = #{record.dueDiligencePerson,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dueDiligencePhone != null" >
+                due_diligence_phone = #{record.dueDiligencePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dueDiligenceEmail != null" >
+                due_diligence_email = #{record.dueDiligenceEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dueDiligenceResult != null" >
+                due_diligence_result = #{record.dueDiligenceResult,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dueDeligenceDate != null" >
+                due_deligence_date = #{record.dueDeligenceDate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditStatus != null" >
+                audit_status = #{record.auditStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditResult != null" >
+                audit_result = #{record.auditResult,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creditScore != null" >
+                credit_score = #{record.creditScore,jdbcType=INTEGER},
+            </if>
+            <if test="record.creditRating != null" >
+                credit_rating = #{record.creditRating,jdbcType=VARCHAR},
+            </if>
+            <if test="record.certificateId != null" >
+                certificate_id = #{record.certificateId,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.supplierFiles != null" >
+                supplier_files = #{record.supplierFiles,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reserved1 != null" >
+                reserved1 = #{record.reserved1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reserved2 != null" >
+                reserved2 = #{record.reserved2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditStartTime != null" >
+                audit_start_time = #{record.auditStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditEndTime != null" >
+                audit_end_time = #{record.auditEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.paymentStatus != null" >
+                payment_status = #{record.paymentStatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_business_supplier
+        set id = #{record.id,jdbcType=INTEGER},
+            name = #{record.name,jdbcType=VARCHAR},
+            abbr = #{record.abbr,jdbcType=VARCHAR},
+            en_name = #{record.enName,jdbcType=VARCHAR},
+            contact_person = #{record.contactPerson,jdbcType=VARCHAR},
+            contact = #{record.contact,jdbcType=VARCHAR},
+            email = #{record.email,jdbcType=VARCHAR},
+            institutional_code = #{record.institutionalCode,jdbcType=VARCHAR},
+            property = #{record.property,jdbcType=VARCHAR},
+            tax_number = #{record.taxNumber,jdbcType=VARCHAR},
+            register_address = #{record.registerAddress,jdbcType=VARCHAR},
+            register_date = #{record.registerDate,jdbcType=VARCHAR},
+            industry_id = #{record.industryId,jdbcType=INTEGER},
+            legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+            region = #{record.region,jdbcType=VARCHAR},
+            province = #{record.province,jdbcType=VARCHAR},
+            city = #{record.city,jdbcType=VARCHAR},
+            district = #{record.district,jdbcType=VARCHAR},
+            asset = #{record.asset,jdbcType=INTEGER},
+            mailing_address = #{record.mailingAddress,jdbcType=VARCHAR},
+            business_address = #{record.businessAddress,jdbcType=VARCHAR},
+            homepage = #{record.homepage,jdbcType=VARCHAR},
+            business_scope = #{record.businessScope,jdbcType=VARCHAR},
+            description = #{record.description,jdbcType=LONGVARCHAR},
+            payment_time = #{record.paymentTime,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=VARCHAR},
+            audit_person = #{record.auditPerson,jdbcType=VARCHAR},
+            audit_phone = #{record.auditPhone,jdbcType=VARCHAR},
+            audit_email = #{record.auditEmail,jdbcType=VARCHAR},
+            due_diligence_person = #{record.dueDiligencePerson,jdbcType=VARCHAR},
+            due_diligence_phone = #{record.dueDiligencePhone,jdbcType=VARCHAR},
+            due_diligence_email = #{record.dueDiligenceEmail,jdbcType=VARCHAR},
+            due_diligence_result = #{record.dueDiligenceResult,jdbcType=VARCHAR},
+            due_deligence_date = #{record.dueDeligenceDate,jdbcType=VARCHAR},
+            audit_status = #{record.auditStatus,jdbcType=VARCHAR},
+            audit_result = #{record.auditResult,jdbcType=VARCHAR},
+            credit_score = #{record.creditScore,jdbcType=INTEGER},
+            credit_rating = #{record.creditRating,jdbcType=VARCHAR},
+            certificate_id = #{record.certificateId,jdbcType=INTEGER},
+            update_time = #{record.updateTime,jdbcType=VARCHAR},
+            supplier_files = #{record.supplierFiles,jdbcType=VARCHAR},
+            reserved1 = #{record.reserved1,jdbcType=VARCHAR},
+            reserved2 = #{record.reserved2,jdbcType=VARCHAR},
+            audit_start_time = #{record.auditStartTime,jdbcType=VARCHAR},
+            audit_end_time = #{record.auditEndTime,jdbcType=VARCHAR},
+            payment_status = #{record.paymentStatus,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.core.supplier.model.TBusinessSupplier" >
+        update t_business_supplier
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="abbr != null" >
+                abbr = #{abbr,jdbcType=VARCHAR},
+            </if>
+            <if test="enName != null" >
+                en_name = #{enName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPerson != null" >
+                contact_person = #{contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="contact != null" >
+                contact = #{contact,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="institutionalCode != null" >
+                institutional_code = #{institutionalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="property != null" >
+                property = #{property,jdbcType=VARCHAR},
+            </if>
+            <if test="taxNumber != null" >
+                tax_number = #{taxNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="registerAddress != null" >
+                register_address = #{registerAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDate != null" >
+                register_date = #{registerDate,jdbcType=VARCHAR},
+            </if>
+            <if test="industryId != null" >
+                industry_id = #{industryId,jdbcType=INTEGER},
+            </if>
+            <if test="legalPerson != null" >
+                legal_person = #{legalPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="region != null" >
+                region = #{region,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="asset != null" >
+                asset = #{asset,jdbcType=INTEGER},
+            </if>
+            <if test="mailingAddress != null" >
+                mailing_address = #{mailingAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="businessAddress != null" >
+                business_address = #{businessAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="homepage != null" >
+                homepage = #{homepage,jdbcType=VARCHAR},
+            </if>
+            <if test="businessScope != null" >
+                business_scope = #{businessScope,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                description = #{description,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="paymentTime != null" >
+                payment_time = #{paymentTime,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="auditPerson != null" >
+                audit_person = #{auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="auditPhone != null" >
+                audit_phone = #{auditPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="auditEmail != null" >
+                audit_email = #{auditEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="dueDiligencePerson != null" >
+                due_diligence_person = #{dueDiligencePerson,jdbcType=VARCHAR},
+            </if>
+            <if test="dueDiligencePhone != null" >
+                due_diligence_phone = #{dueDiligencePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="dueDiligenceEmail != null" >
+                due_diligence_email = #{dueDiligenceEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="dueDiligenceResult != null" >
+                due_diligence_result = #{dueDiligenceResult,jdbcType=VARCHAR},
+            </if>
+            <if test="dueDeligenceDate != null" >
+                due_deligence_date = #{dueDeligenceDate,jdbcType=VARCHAR},
+            </if>
+            <if test="auditStatus != null" >
+                audit_status = #{auditStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="auditResult != null" >
+                audit_result = #{auditResult,jdbcType=VARCHAR},
+            </if>
+            <if test="creditScore != null" >
+                credit_score = #{creditScore,jdbcType=INTEGER},
+            </if>
+            <if test="creditRating != null" >
+                credit_rating = #{creditRating,jdbcType=VARCHAR},
+            </if>
+            <if test="certificateId != null" >
+                certificate_id = #{certificateId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierFiles != null" >
+                supplier_files = #{supplierFiles,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved1 != null" >
+                reserved1 = #{reserved1,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved2 != null" >
+                reserved2 = #{reserved2,jdbcType=VARCHAR},
+            </if>
+            <if test="auditStartTime != null" >
+                audit_start_time = #{auditStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="auditEndTime != null" >
+                audit_end_time = #{auditEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentStatus != null" >
+                payment_status = #{paymentStatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bupt.core.supplier.model.TBusinessSupplier" >
+        update t_business_supplier
+        set name = #{name,jdbcType=VARCHAR},
+            abbr = #{abbr,jdbcType=VARCHAR},
+            en_name = #{enName,jdbcType=VARCHAR},
+            contact_person = #{contactPerson,jdbcType=VARCHAR},
+            contact = #{contact,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            institutional_code = #{institutionalCode,jdbcType=VARCHAR},
+            property = #{property,jdbcType=VARCHAR},
+            tax_number = #{taxNumber,jdbcType=VARCHAR},
+            register_address = #{registerAddress,jdbcType=VARCHAR},
+            register_date = #{registerDate,jdbcType=VARCHAR},
+            industry_id = #{industryId,jdbcType=INTEGER},
+            legal_person = #{legalPerson,jdbcType=VARCHAR},
+            region = #{region,jdbcType=VARCHAR},
+            province = #{province,jdbcType=VARCHAR},
+            city = #{city,jdbcType=VARCHAR},
+            district = #{district,jdbcType=VARCHAR},
+            asset = #{asset,jdbcType=INTEGER},
+            mailing_address = #{mailingAddress,jdbcType=VARCHAR},
+            business_address = #{businessAddress,jdbcType=VARCHAR},
+            homepage = #{homepage,jdbcType=VARCHAR},
+            business_scope = #{businessScope,jdbcType=VARCHAR},
+            description = #{description,jdbcType=LONGVARCHAR},
+            payment_time = #{paymentTime,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=VARCHAR},
+            audit_person = #{auditPerson,jdbcType=VARCHAR},
+            audit_phone = #{auditPhone,jdbcType=VARCHAR},
+            audit_email = #{auditEmail,jdbcType=VARCHAR},
+            due_diligence_person = #{dueDiligencePerson,jdbcType=VARCHAR},
+            due_diligence_phone = #{dueDiligencePhone,jdbcType=VARCHAR},
+            due_diligence_email = #{dueDiligenceEmail,jdbcType=VARCHAR},
+            due_diligence_result = #{dueDiligenceResult,jdbcType=VARCHAR},
+            due_deligence_date = #{dueDeligenceDate,jdbcType=VARCHAR},
+            audit_status = #{auditStatus,jdbcType=VARCHAR},
+            audit_result = #{auditResult,jdbcType=VARCHAR},
+            credit_score = #{creditScore,jdbcType=INTEGER},
+            credit_rating = #{creditRating,jdbcType=VARCHAR},
+            certificate_id = #{certificateId,jdbcType=INTEGER},
+            update_time = #{updateTime,jdbcType=VARCHAR},
+            supplier_files = #{supplierFiles,jdbcType=VARCHAR},
+            reserved1 = #{reserved1,jdbcType=VARCHAR},
+            reserved2 = #{reserved2,jdbcType=VARCHAR},
+            audit_start_time = #{auditStartTime,jdbcType=VARCHAR},
+            audit_end_time = #{auditEndTime,jdbcType=VARCHAR},
+            payment_status = #{paymentStatus,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
